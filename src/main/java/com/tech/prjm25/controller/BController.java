@@ -1,5 +1,8 @@
 package com.tech.prjm25.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +17,8 @@ import com.tech.command.BModifyViewCommand;
 import com.tech.command.BReplyCommand;
 import com.tech.command.BReplyViewCommand;
 import com.tech.command.BWriteCommand;
+import com.tech.prjm25.dao.IDao;
+import com.tech.prjm25.dto.BDto;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -21,11 +26,22 @@ import jakarta.servlet.http.HttpServletRequest;
 public class BController {
 	BCommand command;
 	
+	IDao iDao;
+	@Autowired
+	public BController(IDao iDao) {
+		this.iDao = iDao;
+	}
+	
+	@RequestMapping("/")
+	public String init() {
+		return "redirect:list";
+	}
+	
 	@RequestMapping("/list")
 	public String list(Model model) {
-		System.out.println("list() ctr");
-		command=new BListCommand();
-		command.execute(model);
+		System.out.println("list() mybatis");
+		ArrayList<BDto> list = iDao.list();
+		model.addAttribute("list", list);
 		
 		return "list";
 	}
