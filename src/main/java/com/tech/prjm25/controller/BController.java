@@ -126,10 +126,9 @@ public class BController {
 	
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
-		System.out.println("delete() ctr");
-		model.addAttribute("request",request);
-		command=new BDeleteCommand();
-		command.execute(model);
+		System.out.println("delete() mybatis");
+		String bid = request.getParameter("bid");
+		iDao.delete(bid);
 		
 		return "redirect:list";
 	}
