@@ -44,4 +44,8 @@
 	<update id="replyShape">
 		UPDATE REPLYBOARD SET BSTEP=BSTEP+1 WHERE BGROUP=#{param1} AND BSTEP>#{param1}
 	</update>
+	
+	<delete id="delete">
+		DELETE FROM REPLYBOARD WHERE BID=#{param1}
+	</delete>
 </mapper>

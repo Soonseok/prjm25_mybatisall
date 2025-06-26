@@ -19,4 +19,5 @@ public interface IDao {
 	public void reply(String bid, String bname, String btitle, String bcontent, 
 			String bindent, String bgroup, String bstep);
 	public void replyShape(String strgroup, String strstep);
+	public void delete(String sbid);
 }
