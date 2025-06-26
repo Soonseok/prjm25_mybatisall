@@ -15,4 +15,19 @@
 		INSERT INTO REPLYBOARD(BID,BNAME,BTITLE, BCONTENT,BDATE,BHIT,BGROUP,BSTEP,BINDENT) 
 		VALUES(REPLYBOARD_SEQ.NEXTVAL,#{param1} , #{param1}, #{param1},SYSDATE,0,REPLYBOARD_SEQ.CURRVAL,0,0)
 	</insert>
+	
+	<select id="contentView">
+		SELECT BID,BNAME,BTITLE,BCONTENT,BDATE,BHIT,BGROUP,BSTEP,BINDENT 
+		FROM REPLYBOARD WHERE BID = #{param1}
+	</select>
+	
+	<select id="modifyView">
+		SELECT BID,BNAME,BTITLE,BCONTENT, 
+		BDATE,BHIT,BGROUP,BSTEP,BINDENT  
+		FROM REPLYBOARD WHERE BID = #{param1}
+	</select>
+	
+	<update id="modify">
+		UPDATE REPLYBOARD SET BNAME = #{param2}, BTITLE = #{param3}, BCONTENT = #{param4} WHERE BID = #{param1}
+	</update>
 </mapper>
