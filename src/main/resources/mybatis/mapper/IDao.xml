@@ -30,4 +30,18 @@
 	<update id="modify">
 		UPDATE REPLYBOARD SET BNAME = #{param2}, BTITLE = #{param3}, BCONTENT = #{param4} WHERE BID = #{param1}
 	</update>
+	
+	<select id="replyView">
+		SELECT BID,BNAME,BTITLE,BCONTENT,BDATE,BHIT,BGROUP,BSTEP,BINDENT 
+		FROM REPLYBOARD WHERE BID = #{param1}
+	</select>
+	
+	<insert id="reply">
+		INSERT INTO REPLYBOARD(BID,BNAME,BTITLE, BCONTENT,BGROUP,BSTEP,BINDENT) 
+		VALUES(REPLYBOARD_SEQ.NEXTVAL,#{param2},#{param3},#{param4},#{param6},#{param7}+1,#{param5}+1)
+	</insert>
+	
+	<update id="replyShape">
+		UPDATE REPLYBOARD SET BSTEP=BSTEP+1 WHERE BGROUP=#{param1} AND BSTEP>#{param1}
+	</update>
 </mapper>
